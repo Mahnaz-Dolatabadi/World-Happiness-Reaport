@@ -1,0 +1,84 @@
+SELECT COUNT(*) FROM `aqueous-cabinet-400300.Happiness.happiness_2018`;
+SELECT COUNT(*) FROM `aqueous-cabinet-400300.Happiness.happiness_2019`;
+
+SELECT COUNT(DISTINCT Country) FROM `aqueous-cabinet-400300.Happiness.happiness_2018`;
+SELECT COUNT(DISTINCT Country) FROM `aqueous-cabinet-400300.Happiness.happiness_2019`;
+
+SELECT 
+    MAX(Score) AS Max_Score, 
+    MIN(Score) AS Min_Score, 
+    AVG(Score) AS Avg_Score 
+FROM `aqueous-cabinet-400300.Happiness.happiness_2018`;
+
+SELECT 
+    MAX(Score) AS Max_Score, 
+    MIN(Score) AS Min_Score, 
+    AVG(Score) AS Avg_Score 
+FROM `aqueous-cabinet-400300.Happiness.happiness_2019`;
+
+SELECT 
+    h2018.Country,
+    h2018.Score AS Happiness_Score_2018,
+    h2019.Score AS Happiness_Score_2019
+FROM 
+    `aqueous-cabinet-400300.Happiness.happiness_2018` h2018
+JOIN 
+    `aqueous-cabinet-400300.Happiness.happiness_2019` h2019 
+ON 
+    h2018.Country = h2019.Country;
+
+
+SELECT 
+    happiness_2018.Country AS Country,
+    happiness_2018.Score AS Happiness_Score_2018,
+    happiness_2019.Score AS Happiness_Score_2019
+FROM 
+    `aqueous-cabinet-400300.Happiness.happiness_2018` AS happiness_2018
+JOIN 
+    `aqueous-cabinet-400300.Happiness.happiness_2019` AS happiness_2019
+ON 
+    happiness_2018.Country = happiness_2019.Country;
+
+
+SELECT 
+    AVG(h2018.Score) AS Avg_Happiness_2018, 
+    AVG(h2019.Score) AS Avg_Happiness_2019 
+FROM 
+    `aqueous-cabinet-400300.Happiness.happiness_2018` h2018
+JOIN 
+    `aqueous-cabinet-400300.Happiness.happiness_2019` h2019 
+ON 
+    h2018.Country = h2019.Country;
+
+
+SELECT 
+    h2018.Country,
+    h2018.Score AS Happiness_Score_2018,
+    h2019.Score AS Happiness_Score_2019,
+    (h2019.Score - h2018.Score) AS Change_in_Happiness
+FROM 
+    `aqueous-cabinet-400300.Happiness.happiness_2018` h2018
+JOIN 
+    `aqueous-cabinet-400300.Happiness.happiness_2019` h2019 
+ON 
+    h2018.Country = h2019.Country
+ORDER BY 
+    Change_in_Happiness DESC;
+
+
+
+    CREATE TABLE `aqueous-cabinet-400300.Happiness.happiness_trends` AS
+SELECT 
+    h2018.Country,
+    h2018.Score AS Happiness_Score_2018,
+    h2019.Score AS Happiness_Score_2019,
+    (h2019.Score - h2018.Score) AS Change_in_Happiness
+FROM 
+    `aqueous-cabinet-400300.Happiness.happiness_2018` h2018
+JOIN 
+    `aqueous-cabinet-400300.Happiness.happiness_2019` h2019 
+ON 
+    h2018.Country = h2019.Country
+ORDER BY 
+    Change_in_Happiness DESC;
+
